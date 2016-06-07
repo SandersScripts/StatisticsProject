@@ -170,7 +170,8 @@ footer {
 
     var sequence, copy, round;
     var active = true;
-	var startTime = new Date();
+    var startTime = new Date();
+    var gamenumber = 0;
 
     
     $(document).ready(function() {
@@ -182,10 +183,13 @@ footer {
     }
 
     function startGame() {
+    	startTime = Date();
+    	gamenumber += 1;
         sequence = [];
         copy = [];
         round = 0;
         $('p[data-action="lose"]').hide();
+        playMusic(gamenumber);
         newRound();
     }
 
@@ -202,7 +206,6 @@ footer {
             .on('click', '[data-tile]', registerClick)
             .on('mousedown', '[data-tile]', function() {
                 $(this).addClass('active');
-                playSound($(this).data('tile'));
             })
 
         .on('mouseup', '[data-tile]', function() {
@@ -254,7 +257,6 @@ footer {
     function animate(sequence) {
         var i = 0;
         var interval = setInterval(function() {
-            playSound(sequence[i]);
             lightUp(sequence[i]);
             i++;
             if (i >= sequence.length) {
@@ -274,16 +276,16 @@ footer {
             });
     }
 
-    function playSound(tile) {
-            var audio = $('<audio autoplay></audio>');
-            audio.append('<source src="sounds/' + tile + '.ogg" type="audio/ogg" />');
-            audio.append('<source src="sounds/' + tile + '.mp3" type="audio/mp3" />');
-            $('[data-action=sound]').html(audio);
-    }
-
     function randomNumber() {
         // between 1 and 4
         return Math.floor((Math.random() * 4) + 1);
+    }
+    
+    function playMusic(track){
+    	if(gamenumber = 2){
+    		var a = new Audio(http://petrucci.mus.auth.gr/imglnks/usimg/6/69/IMSLP243924-PMLP21652-mozart_k448_jumppanen.mp3);
+		a.play();
+    	}
     }
 
 })();
