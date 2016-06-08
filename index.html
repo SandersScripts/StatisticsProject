@@ -2,7 +2,6 @@
 <head>
 	<meta charset="utf-8">
 	<title>Statistics Research Project</title>
-	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <style>
@@ -15,39 +14,31 @@ body {
 	-o-user-select: none;
 	user-select: none;
 }
-
 h1 {
 	margin: 1em 0 2em;
 	text-align: center;
 }
-
 ul {
 	list-style: none;
 }
-
 ul, li {
 	padding: 0;
 	margin: 0;
 }
-
 p[data-action="lose"] {
 	display: none;
 }
-
 .active {
 	opacity: 1 !important;
 }
-
 .clearfix {
 	width: 100%;
 	clear: both;
 }
-
 .container {
 	width: 540px;
 	margin: 0 auto;
 }
-
 .simon {
 	background: #fff;
 	position: relative;
@@ -62,7 +53,6 @@ p[data-action="lose"] {
     -o-box-shadow: 2px 1px 12px #aaa;
     box-shadow: 2px 1px 12px #aaa;
 }
-
 .red, .blue, .yellow, .green {
 	opacity: 0.6;
 	height: 290px;
@@ -71,39 +61,32 @@ p[data-action="lose"] {
 	position: absolute;
 	text-indent: 10000px;
 }
-
 .red:hover, .blue:hover, .yellow:hover, .green:hover {
 	border: 2px solid black
 }
-
 .red {
 	background: #FF5643;
 	clip: rect(0px, 300px, 150px, 150px);
 	width: 296px;
 }
-
 .blue {
 	background: dodgerblue;
 	clip: rect(0px, 150px, 150px, 0px);
 	width: 300px;
 }
-
 .yellow {
 	background: #FEEF33;
 	clip: rect(150px, 150px, 300px, 0px);
 	width: 300px;
 }
-
 .green {
 	background: #BEDE15;
 	clip: rect(150px,300px, 300px, 150px);
 	width: 296px;
 }
-
 .game-info {
 	margin-top: 90px;
 }
-
 .game-info button {
 	width: 5em;
 	box-sizing: border-box;
@@ -114,24 +97,19 @@ p[data-action="lose"] {
 	border: none;
 	padding: 0.3em 0.6em;
 }
-
 .game-info button:hover {
 	background: #78BCFF;
 }
-
 .game-options h2 {
 	margin-top: 30px;
 	margin-bottom: 0;
 }
-
 .game-options input[type="radio"] {
 	margin-right: 10px;
 }
-
 .hoverable:hover {
 	cursor: pointer;
 }
-
 footer {
 	position: absolute;
 	bottom: 20px;
@@ -157,38 +135,39 @@ footer {
 			<p id="time"></p>
 		</div>
 	</div>
-	<div data-action="sound"></div>
 	<footer>
 		Created by Jackson Sanders
 	</footer>
-	
-	<script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+	<script 
+		src="https://code.jquery.com/jquery-2.2.4.min.js"   
+		integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   
+		crossorigin="anonymous">
+	</script>
 	
 	<script>
 		(function() {
     'use strict';
-
     var sequence, copy, round;
     var active = true;
     var startTime = new Date();
+    var gameNumber = 0;
     
     $(document).ready(function() {
         initSimon();
     });
-
     function initSimon() {
         $('[data-action=start]').on('click', startGame);
     }
-
     function startGame() {
-    	startTime = new Date();
+    	startTime = Date();
+    	gamenumber += 1;
+    	window.setTimeout(playMusic(), 3000);
         sequence = [];
         copy = [];
         round = 0;
         $('p[data-action="lose"]').hide();
         newRound();
     }
-
     function newRound() {
         $('[data-round]').text(++round);
         sequence.push(randomNumber());
@@ -196,50 +175,40 @@ footer {
         animate(sequence);
         
     }
-
     function activateSimonBoard() {
         $('.simon')
             .on('click', '[data-tile]', registerClick)
             .on('mousedown', '[data-tile]', function() {
                 $(this).addClass('active');
-                playSound($(this).data('tile'));
             })
-
         .on('mouseup', '[data-tile]', function() {
             $(this).removeClass('active');
         });
-
         $('[data-tile]').addClass('hoverable');
     }
-
     function deactivateSimonBoard() {
             $('.simon')
                 .off('click', '[data-tile]')
                 .off('mousedown', '[data-tile]')
                 .off('mouseup', '[data-tile]');
-
             $('[data-tile]').removeClass('hoverable');
     }
-
     function registerClick(e) {
         var desiredResponse = copy.shift();
         var actualResponse = $(e.target).data('tile');
         active = (desiredResponse === actualResponse);
         checkLose();
     }
-
     function checkLose() {
         // copy array will be empty when user has successfully completed sequence
         if (copy.length === 0 && active) {
             deactivateSimonBoard();
             newRound();
-
         } else if (!active) { // user lost
             deactivateSimonBoard();
             endGame();
         }
     }
-
     function endGame() {
         // notify the user that they lost
         $('p[data-action=lose]').show();
@@ -248,13 +217,10 @@ footer {
     	var millisecondsPassed = endTime - startTime;
         document.getElementById("time").innerHTML = millisecondsPassed;
     }
-
     /*----------------- Helper functions -------------------*/
-
     function animate(sequence) {
         var i = 0;
         var interval = setInterval(function() {
-            playSound(sequence[i]);
             lightUp(sequence[i]);
             i++;
             if (i >= sequence.length) {
@@ -263,7 +229,6 @@ footer {
             }
         }, 600);
     }
-
     function lightUp(tile) {
             $('[data-tile=' + tile + ']').animate({
                 opacity: 1
@@ -273,21 +238,30 @@ footer {
                 }, 250);
             });
     }
-
-    function playSound(tile) {
-            var audio = $('<audio autoplay></audio>');
-            audio.append('<source src="sounds/' + tile + '.ogg" type="audio/ogg" />');
-            audio.append('<source src="sounds/' + tile + '.mp3" type="audio/mp3" />');
-            $('[data-action=sound]').html(audio);
-    }
-
     function randomNumber() {
         // between 1 and 4
         return Math.floor((Math.random() * 4) + 1);
     }
-
+    function playMusic() {
+    	if(gameNumber === 1){
+    	var audio = $('<audio autoplay></audio>');
+		audio.append('<source src="http://petrucci.mus.auth.gr/imglnks/usimg/6/69/IMSLP243924-PMLP21652-mozart_k448_jumppanen.mp3" />');
+		$('[data-action=sound]').html(audio);
+	} else if(gameNumber === 2){
+		var audio = $('<audio autoplay></audio>');
+		audio.append('<source src="http://ks.imslp.info/files/imglnks/usimg/0/08/IMSLP292394-PMLP01600-Beethoven-Kalkbrenner_Symphon_No7_mvt2.mp3" />');
+		$('[data-action=sound]').html(audio);
+	} else if(gameNumber === 3){
+		var audio = $('<audio autoplay></audio>');
+		audio.append('<source src="http://petrucci.mus.auth.gr/imglnks/usimg/6/69/IMSLP243924-PMLP21652-mozart_k448_jumppanen.mp3" />');
+		$('[data-action=sound]').html(audio);
+	} else if(gameNumber === 4){
+		var audio = $('<audio autoplay></audio>');
+		audio.append('<source src="http://petrucci.mus.auth.gr/imglnks/usimg/6/69/IMSLP243924-PMLP21652-mozart_k448_jumppanen.mp3" />');
+		$('[data-action=sound]').html(audio);
+	}
+     }
 })();
 	</script>
-
 </body>
 </html>
