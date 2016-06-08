@@ -160,6 +160,7 @@ footer {
         $('[data-action=start]').on('click', startGame);
     }
     function startGame() {
+    	console.log(startTime);
     	startTime = Date();
     	window.setTimeout(playMusic(), 3000);
         sequence = [];
@@ -216,6 +217,9 @@ footer {
         var endTime = new Date();
     	var millisecondsPassed = endTime - startTime;
         document.getElementById("time").innerHTML = millisecondsPassed;
+        console.log(startTime);
+        console.log(endTime);
+        console.log(millisecondsPassed);
     }
     /*----------------- Helper functions -------------------*/
     function animate(sequence) {
