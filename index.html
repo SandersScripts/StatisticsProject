@@ -129,7 +129,7 @@ footer {
 			</ul>
 		</div>
 		<div class="game-info">
-			<h2>Round: <span data-round="0">0</span> Game Number: <span data-gameNumber="0">0</span></h2>
+			<h2>Round: <span data-round="0">0</span></h2>
 			<button data-action="start">Start</button>
 			<p data-action="lose">Sorry, you lost after <span data-round="0"></span> rounds!</p>
 			<p id="time"></p>
@@ -217,7 +217,7 @@ footer {
         $($('[data-round]')[0]).text('0');
         var time = new Date();
         var endTime = time.getTime();
-    	var millisecondsPassed = endTime - startTime;
+    	var millisecondsPassed = (endTime - startTime) / 1000;
         document.getElementById("time").innerHTML = millisecondsPassed;
         console.log(startTime);
         console.log(endTime);
