@@ -243,6 +243,7 @@ footer {
         return Math.floor((Math.random() * 4) + 1);
     }
     function playMusic() {
+    	console.log(gameNumber);
     	if(gameNumber === 1){
     	var audio = $('<audio autoplay></audio>');
 		audio.append('<source src="http://petrucci.mus.auth.gr/imglnks/usimg/6/69/IMSLP243924-PMLP21652-mozart_k448_jumppanen.mp3" />');
