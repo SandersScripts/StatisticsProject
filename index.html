@@ -150,7 +150,8 @@ footer {
     'use strict';
     var sequence, copy, round;
     var active = true;
-    var startTime = new Date();
+    var time = new Date();
+    var startTime = time.getTime();
     var gameNumber = 0;
     
     $(document).ready(function() {
@@ -161,7 +162,7 @@ footer {
     }
     function startGame() {
     	console.log(startTime);
-    	startTime = Date.getTime();
+    	startTime = time.getTime();
     	window.setTimeout(playMusic(), 3000);
         sequence = [];
         copy = [];
@@ -214,8 +215,7 @@ footer {
         // notify the user that they lost
         $('p[data-action=lose]').show();
         $($('[data-round]')[0]).text('0');
-        var endTime = new Date;
-        endTime = Date.getTime();
+        var endTime = time.getTime();
     	var millisecondsPassed = endTime - startTime;
         document.getElementById("time").innerHTML = millisecondsPassed;
         console.log(startTime);
