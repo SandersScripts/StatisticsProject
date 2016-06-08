@@ -243,22 +243,22 @@ footer {
         return Math.floor((Math.random() * 4) + 1);
     }
     function playMusic() {
-    	if(gameNumber = 1){
+    	if(gameNumber === 1){
     	var audio = $('<audio autoplay></audio>');
 		audio.append('<source src="http://petrucci.mus.auth.gr/imglnks/usimg/6/69/IMSLP243924-PMLP21652-mozart_k448_jumppanen.mp3" />');
 		$('[data-action=sound]').html(audio);
 		gameNumber += 1;
-	} else if(gameNumber = 2){
+	} else if(gameNumber === 2){
 		var audio = $('<audio autoplay></audio>');
 		audio.append('<source src="http://ks.imslp.info/files/imglnks/usimg/0/08/IMSLP292394-PMLP01600-Beethoven-Kalkbrenner_Symphon_No7_mvt2.mp3" />');
 		$('[data-action=sound]').html(audio);
 		gameNumber += 1;
-	} else if(gameNumber = 3){
+	} else if(gameNumber === 3){
 		var audio = $('<audio autoplay></audio>');
 		audio.append('<source src="http://petrucci.mus.auth.gr/imglnks/usimg/6/69/IMSLP243924-PMLP21652-mozart_k448_jumppanen.mp3" />');
 		$('[data-action=sound]').html(audio);
 		gameNumber += 1;
-	} else if(gameNumber = 4){
+	} else if(gameNumber === 4){
 		var audio = $('<audio autoplay></audio>');
 		audio.append('<source src="http://petrucci.mus.auth.gr/imglnks/usimg/6/69/IMSLP243924-PMLP21652-mozart_k448_jumppanen.mp3" />');
 		$('[data-action=sound]').html(audio);
